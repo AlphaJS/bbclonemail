@@ -31,11 +31,11 @@ BBCloneMail.vent.on("layout:rendered", function(){
 //
 // Use the TrafficCop plugin to ensure we only make one
 // request to get the template
-Backbone.Marionette.TemplateCache.loadTemplate = function(templateId, callback){
+Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId, callback){
   var that = this;
   var tmpId = templateId.replace("#", "");
   var url = "/templates/" + tmpId + ".html";
-  var promise = $.trafficCop(url);
+  var promise = $.ajax(url);
   promise.done(function(templateHtml){
     var $template = $(templateHtml);
     var template = that.compileTemplate($template.html());
